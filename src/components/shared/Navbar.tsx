@@ -44,7 +44,7 @@ const Navbar = () => {
               </span>
             </Link>
             <Link href="/login" className="text-lg font-medium cursor-pointer">
-              <Button variant="outline" className="border-orange-400">
+              <Button variant="outline" className="">
                 <User /> Login
               </Button>
             </Link>
