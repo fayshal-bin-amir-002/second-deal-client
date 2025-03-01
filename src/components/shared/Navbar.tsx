@@ -9,10 +9,20 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { Avatar, AvatarFallback } from "../ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { logoutUser } from "@/services/auth";
+import NavBarSheet from "../modules/home/navbar/NavBarSheet";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user } = useUser();
+  const { user, setIsLoading } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +37,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogout = async () => {
+    await logoutUser();
+    setIsLoading(true);
+  };
+
   return (
     <nav
       className={` sticky top-0 w-full z-50 transition-all duration-300 py-3 ${
@@ -40,6 +55,11 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-6 md:gap-8">
+            {user && (
+              <Link href="/" className="hidden md:block">
+                <Button>Sell My Product</Button>
+              </Link>
+            )}
             <Link href="/wishlists" className="text-lg font-medium relative">
               <ShoppingBag />
               <span className="-top-3 -right-3 absolute text-orange-400">
@@ -47,25 +67,49 @@ const Navbar = () => {
               </span>
             </Link>
             {user ? (
-              <Avatar>
-                <Image
-                  src="https://github.com/shadcn.png"
-                  alt="avatar-image"
-                  width={100}
-                  height={100}
-                />
-                <AvatarFallback>SD</AvatarFallback>
-              </Avatar>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild className="cursor-pointer">
+                  <Avatar>
+                    <Image
+                      src="https://github.com/shadcn.png"
+                      alt="avatar-image"
+                      width={100}
+                      height={100}
+                    />
+                    <AvatarFallback>SD</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuGroup>
+                    <Link href="/">
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                    </Link>
+                    <Link href="/">
+                      <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                    </Link>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={() => handleLogout()}
+                  >
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Link
                 href="/login"
-                className="text-lg font-medium cursor-pointer"
+                className="hidden md:block text-lg font-medium cursor-pointer"
               >
-                <Button variant="outline" className="">
+                <Button variant="outline">
                   <User /> Login
                 </Button>
               </Link>
             )}
+            <span className="block md:hidden">
+              <NavBarSheet user={user} />
+            </span>
           </div>
         </div>
       </Container>

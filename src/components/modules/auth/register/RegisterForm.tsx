@@ -32,11 +32,13 @@ import { registerUser } from "@/services/auth";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IErrorResponse } from "@/types";
+import { useUser } from "@/context/UserContext";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { setIsLoading } = useUser();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
@@ -53,6 +55,7 @@ export function RegisterForm({
     try {
       const res = await registerUser(data);
       if (res?.success) {
+        setIsLoading(true);
         toast.success(res?.message);
         if (redirect) {
           router.push(redirect);
