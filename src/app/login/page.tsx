@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/modules/login/LoginForm";
+import { LoginForm } from "@/components/modules/auth/login/LoginForm";
 import Container from "@/components/shared/Container";
 
 const LoginPage = () => {
