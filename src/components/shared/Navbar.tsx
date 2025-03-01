@@ -7,9 +7,12 @@ import Image from "next/image";
 import { ShoppingBag, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import { useUser } from "@/context/UserContext";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,11 +46,26 @@ const Navbar = () => {
                 1
               </span>
             </Link>
-            <Link href="/login" className="text-lg font-medium cursor-pointer">
-              <Button variant="outline" className="">
-                <User /> Login
-              </Button>
-            </Link>
+            {user ? (
+              <Avatar>
+                <Image
+                  src="https://github.com/shadcn.png"
+                  alt="avatar-image"
+                  width={100}
+                  height={100}
+                />
+                <AvatarFallback>SD</AvatarFallback>
+              </Avatar>
+            ) : (
+              <Link
+                href="/login"
+                className="text-lg font-medium cursor-pointer"
+              >
+                <Button variant="outline" className="">
+                  <User /> Login
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </Container>
