@@ -51,7 +51,13 @@ const Navbar = () => {
       <Container>
         <div className="flex justify-between items-center">
           <Link href="/">
-            <Image src={logo} alt="logo-image" width={160} height={100} />
+            <Image
+              src={logo}
+              alt="logo-image"
+              width={160}
+              height={100}
+              priority
+            />
           </Link>
 
           <div className="flex items-center gap-6 md:gap-8">
@@ -84,7 +90,7 @@ const Navbar = () => {
                     <Link href="/">
                       <DropdownMenuItem>Profile</DropdownMenuItem>
                     </Link>
-                    <Link href="/">
+                    <Link href={`/${user?.role}/dashboard`}>
                       <DropdownMenuItem>Dashboard</DropdownMenuItem>
                     </Link>
                   </DropdownMenuGroup>
