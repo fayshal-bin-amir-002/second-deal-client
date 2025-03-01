@@ -38,8 +38,8 @@ const HeroSection = () => {
               <Image
                 src={image1}
                 alt="hero-image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
 
@@ -47,16 +47,16 @@ const HeroSection = () => {
               <Image
                 src={image2}
                 alt="hero-image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
             <div className="bg-muted rounded-xl aspect-square relative overflow-hidden hover:-translate-y-2 duration-300">
               <Image
                 src={image3}
                 alt="hero-image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
           </div>
