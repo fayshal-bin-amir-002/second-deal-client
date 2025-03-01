@@ -26,7 +26,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 15) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -44,8 +44,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={` sticky top-0 w-full z-50 transition-all duration-300 py-3 ${
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      className={` sticky top-0 w-full z-50 transition-all duration-200 py-3 ${
+        isScrolled ? "bg-white shadow" : "bg-transparent"
       }`}
     >
       <Container>
