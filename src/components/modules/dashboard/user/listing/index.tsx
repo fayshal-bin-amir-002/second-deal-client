@@ -1,5 +1,6 @@
 "use client";
 
+import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
 import { IListingItem, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
@@ -51,7 +52,15 @@ const UserListingManage = ({
     {
       accessorKey: "status",
       header: "Status",
-      cell: ({ row }) => <span>{row.original.status}</span>,
+      cell: ({ row }) => (
+        <span
+          className={`${
+            row.original.status === "Available" && "text-orange-400"
+          } ${row.original.status === "Sold" && "text-green-400"}`}
+        >
+          {row.original.status}
+        </span>
+      ),
     },
     // {
     //   accessorKey: "action",
@@ -92,6 +101,7 @@ const UserListingManage = ({
   return (
     <div>
       <SDTable columns={columns} data={items || []} />
+      <SDPagination totalPage={meta?.totalPage} />
     </div>
   );
 };
