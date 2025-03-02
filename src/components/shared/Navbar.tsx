@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "./Container";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
-import { ShoppingBag, User } from "lucide-react";
+import { MessageSquareText, ShoppingBag, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
@@ -60,12 +60,15 @@ const Navbar = () => {
             />
           </Link>
 
-          <div className="flex items-center gap-6 md:gap-8">
+          <div className="flex items-center gap-5 md:gap-8">
             {user && (
               <Link href="/" className="hidden md:block">
                 <Button>Sell My Product</Button>
               </Link>
             )}
+            <Link href="/wishlists" className="text-lg font-medium relative">
+              <MessageSquareText />
+            </Link>
             <Link href="/wishlists" className="text-lg font-medium relative">
               <ShoppingBag />
               <span className="-top-3 -right-3 absolute text-orange-400">

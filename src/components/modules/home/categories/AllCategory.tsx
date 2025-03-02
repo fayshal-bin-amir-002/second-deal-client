@@ -2,6 +2,7 @@ import { ICategory } from "@/types";
 import CategoryCard from "./CategoryCard";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const AllCategory = ({ categories }: { categories: ICategory[] }) => {
   return (
@@ -13,7 +14,9 @@ const AllCategory = ({ categories }: { categories: ICategory[] }) => {
         <Link href="/">
           <Card className="bg-orange-100 flex items-center flex-col h-full justify-center">
             <CardContent>
-              <h3 className="text-2xl font-semibold text-center">View All </h3>
+              <h3 className="text-xl font-semibold text-center flex items-center gap-1">
+                View All <ArrowRight />
+              </h3>
             </CardContent>
           </Card>
         </Link>

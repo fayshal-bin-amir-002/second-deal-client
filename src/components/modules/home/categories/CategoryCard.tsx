@@ -18,7 +18,7 @@ const CategoryCard = ({ category }: { category: ICategory }) => {
                 className="mx-auto mb-2"
               />
             </div>
-            <h3 className="text-2xl font-semibold text-center">
+            <h3 className="text-xl md:text-2xl font-semibold text-center">
               {category?.name}
             </h3>
           </CardContent>
