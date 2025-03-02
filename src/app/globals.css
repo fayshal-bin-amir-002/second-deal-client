@@ -11,7 +11,7 @@
 
 @layer base {
   :root {
-    --background: oklch(1 0 0);
+    --background: oklch(0.9856 0.008 101.81);
     --foreground: oklch(0.1536 0.011 27.54);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.1536 0.011 27.54);

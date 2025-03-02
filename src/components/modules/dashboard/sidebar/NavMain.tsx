@@ -18,22 +18,24 @@ import Link from "next/link";
 const NavMain = ({
   items,
 }: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    isNotCollapsible?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items:
+    | {
+        title: string;
+        url: string;
+        icon?: LucideIcon;
+        isActive?: boolean;
+        isNotCollapsible?: boolean;
+        items?: {
+          title: string;
+          url: string;
+        }[];
+      }[]
+    | undefined;
 }) => {
   return (
     <SidebarGroup>
       <SidebarMenu>
-        {items.map((item) => (
+        {items?.map((item) => (
           <Collapsible
             key={item.title}
             asChild
@@ -59,7 +61,7 @@ const NavMain = ({
               )}
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
+                  {item?.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
                         <Link href={subItem.url}>

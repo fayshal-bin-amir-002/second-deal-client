@@ -9,7 +9,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "SecondHand 🛒 - Marketplace for Buying & Selling Used Items",
+  title:
+    "Second Deal || SecondHand 🛒 - Marketplace for Buying & Selling Used Items",
   description:
     "SecondHand is a platform that connects buyers and sellers of used items. Discover great deals and give new life to pre-loved products.",
   keywords:

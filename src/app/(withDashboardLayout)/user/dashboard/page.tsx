@@ -1,7 +1,7 @@
 const UserDashboardPage = () => {
   return (
     <div>
-      <p>UserDashboardPage</p>
+      <p>Welcome to Dashboard</p>
     </div>
   );
 };
