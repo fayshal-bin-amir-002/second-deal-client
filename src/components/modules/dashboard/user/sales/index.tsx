@@ -2,9 +2,20 @@
 
 import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
-import { IMeta, ITransaction } from "@/types";
+import { IErrorResponse, IMeta, ITransaction } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { updateTransactionStatus } from "@/services/transactions";
+import { toast } from "sonner";
 
 const UserSalesManage = ({
   data: transactions,
@@ -31,29 +42,31 @@ const UserSalesManage = ({
       ),
     },
     {
-      accessorKey: "price",
-      header: "Price",
-      cell: ({ row }) => <span>{row.original.itemId.price}$</span>,
-    },
-    {
       accessorKey: "category",
       header: "Category",
       cell: ({ row }) => <span>{row.original.itemId.category.name}</span>,
     },
     {
-      accessorKey: "sellerEmail",
-      header: "Seller Email",
-      cell: ({ row }) => <span>{row.original.sellerId.email}</span>,
+      accessorKey: "buyerEmail",
+      header: "Buyer Email",
+      cell: ({ row }) => <span>{row.original.buyerId.email}</span>,
     },
     {
-      accessorKey: "sellerPhone",
-      header: "Seller Phone",
-      cell: ({ row }) => <span>{row.original.sellerId.phoneNumber}</span>,
+      accessorKey: "buyerPhone",
+      header: "Buyer Phone",
+      cell: ({ row }) => <span>{row.original.buyerId.phoneNumber}</span>,
     },
     {
-      accessorKey: "sellerLocation",
-      header: "Seller Location",
-      cell: ({ row }) => <span>{row.original.sellerId.location}</span>,
+      accessorKey: "buyerLocation",
+      header: "Buyer Location",
+      cell: ({ row }) => <span>{row.original.buyerId.location}</span>,
+    },
+    {
+      accessorKey: "date",
+      header: "Date",
+      cell: ({ row }) => (
+        <span>{new Date(row.original.createdAt).toLocaleDateString()}</span>
+      ),
     },
     {
       accessorKey: "status",
@@ -70,7 +83,47 @@ const UserSalesManage = ({
         </span>
       ),
     },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: ({ row }) => (
+        <Select
+          disabled={
+            row.original.status === "Completed" ||
+            row.original.status === "Canceled"
+          }
+          onValueChange={(e) => handleStatusChange(e, row.original._id)}
+        >
+          <SelectTrigger className="w-[150px]">
+            <SelectValue placeholder="Change Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="Completed">Approved</SelectItem>
+              <SelectItem value="Canceled">Cancel</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+    },
   ];
+
+  const handleStatusChange = async (status: string, id: string) => {
+    const data = {
+      status: status,
+    };
+    try {
+      const res = await updateTransactionStatus(id, data);
+      if (res?.success) {
+        toast.success(res?.message);
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (err) {
+      const error = err as IErrorResponse;
+      toast.error(error?.message);
+    }
+  };
 
   return (
     <div>

@@ -1,4 +1,7 @@
+"use server";
+
 import { IErrorResponse } from "@/types";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getUserPurchasesHistory = async (page?: string) => {
@@ -28,7 +31,7 @@ export const getUserSalesHistory = async (page?: string) => {
       `${process.env.NEXT_PUBLIC_BASE_API}/transactions/sales?page=${page}`,
       {
         next: {
-          tags: ["Purchases"],
+          tags: ["Sales"],
         },
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
@@ -36,6 +39,30 @@ export const getUserSalesHistory = async (page?: string) => {
         cache: "no-store",
       }
     );
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};
+
+export const updateTransactionStatus = async (
+  id: string,
+  data: { status: string }
+) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/transactions/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    revalidateTag("Sales UserListings");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

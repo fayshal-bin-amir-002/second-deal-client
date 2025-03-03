@@ -8,8 +8,10 @@ interface IUser {
 }
 
 export interface ITransaction {
+  _id: string;
   buyerId: IUser;
   sellerId: IUser;
   itemId: IListingItem;
   status: "Pending" | "Completed" | "Canceled";
+  createdAt: string;
 }
