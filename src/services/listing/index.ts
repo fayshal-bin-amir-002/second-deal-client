@@ -27,7 +27,6 @@ export const getUserListingItems = async (page?: string) => {
         next: {
           tags: ["UserListings"],
         },
-        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
@@ -50,7 +49,7 @@ export const addProductToList = async (data: IProduct) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("UserListings");
+    revalidateTag("UserListings Listing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -66,7 +65,6 @@ export const getASingleProduct = async (id: string) => {
         next: {
           tags: ["SingleProduct"],
         },
-        cache: "force-cache",
       }
     );
     return await res.json();
@@ -87,10 +85,9 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
         body: JSON.stringify(data),
-        cache: "force-cache",
       }
     );
-    revalidateTag("UserListings SingleProduct");
+    revalidateTag("UserListings SingleProduct Listing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

@@ -1,3 +1,5 @@
+"use server";
+
 import { IErrorResponse } from "@/types";
 
 export const getAllCategory = async () => {

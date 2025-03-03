@@ -56,7 +56,6 @@ const UpdateProductForm = ({ item }: { item: IListingItem }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getAllCategory();
-
       setCategories(data);
     };
 

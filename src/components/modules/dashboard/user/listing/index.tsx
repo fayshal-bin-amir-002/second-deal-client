@@ -20,7 +20,7 @@ const UserListingManage = ({
   meta: IMeta;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<IListingItem | {}>({});
+  const [selectedItem, setSelectedItem] = useState<IListingItem | null>(null);
   const router = useRouter();
   const handleView = (data: IListingItem) => {
     setModalOpen(true);
