@@ -9,7 +9,7 @@ import {
   LayoutList,
 } from "lucide-react";
 
-const dashboardRoutes = () => {
+const DashboardRoutes = () => {
   const { user } = useUser();
   if (user?.role === "user") {
     return [
@@ -62,4 +62,4 @@ const dashboardRoutes = () => {
   }
 };
 
-export default dashboardRoutes;
+export default DashboardRoutes;

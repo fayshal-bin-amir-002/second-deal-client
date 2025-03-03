@@ -1,4 +1,7 @@
-import { IErrorResponse } from "@/types";
+"use server";
+
+import { IErrorResponse, IProduct } from "@/types";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getAllListingItems = async () => {
@@ -30,6 +33,24 @@ export const getUserListingItems = async (page?: string) => {
         },
       }
     );
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};
+
+export const addProductToList = async (data: IProduct) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      body: JSON.stringify(data),
+    });
+    revalidateTag("UserListings");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

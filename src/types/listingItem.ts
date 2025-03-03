@@ -22,3 +22,12 @@ export interface IListingItem {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IProduct {
+  category: string;
+  condition: "New" | "Used";
+  description: string;
+  images: string[];
+  price: number;
+  title: string;
+}

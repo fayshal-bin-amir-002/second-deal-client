@@ -9,10 +9,10 @@ export const getUserPurchasesHistory = async (page?: string) => {
         next: {
           tags: ["Purchases"],
         },
-        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
+        cache: "no-store",
       }
     );
     return await res.json();
@@ -30,10 +30,10 @@ export const getUserSalesHistory = async (page?: string) => {
         next: {
           tags: ["Purchases"],
         },
-        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
+        cache: "no-store",
       }
     );
     return await res.json();

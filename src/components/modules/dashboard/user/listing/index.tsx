@@ -1,10 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
 import { IListingItem, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { Plus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const UserListingManage = ({
   items,
@@ -100,6 +103,13 @@ const UserListingManage = ({
   ];
   return (
     <div>
+      <div className="text-right pb-4">
+        <Link href="/user/listing/add-product">
+          <Button variant="outline">
+            Add My Product <Plus />
+          </Button>
+        </Link>
+      </div>
       <SDTable columns={columns} data={items || []} />
       {meta?.totalPage > 0 && <SDPagination totalPage={meta?.totalPage} />}
     </div>
