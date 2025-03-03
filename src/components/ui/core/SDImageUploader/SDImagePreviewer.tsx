@@ -8,6 +8,7 @@ type ISDImangePreviewer = {
   imagePreview: string[];
   setImagePreview: Dispatch<SetStateAction<string[]>>;
   className?: string;
+  isEditable?: boolean;
 };
 
 const SDImagePreviewer = ({
@@ -15,6 +16,7 @@ const SDImagePreviewer = ({
   imagePreview,
   setImagePreview,
   className,
+  isEditable = true,
 }: ISDImangePreviewer) => {
   const handleRemove = (index: number) => {
     setImageFiles((prev) => prev.filter((_, idx) => idx !== index));
@@ -35,14 +37,16 @@ const SDImagePreviewer = ({
             alt={`Preview ${index + 1}`}
             className="object-cover w-full h-full"
           />
-          <Button
-            type="button"
-            size="sm"
-            onClick={() => handleRemove(index)}
-            className="bg-red-300 hover:bg-red-400 absolute -top-0 -right-0 w-6 h-6 p-0 rounded-full"
-          >
-            <X className="w-4 h-4" />
-          </Button>
+          {isEditable && (
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => handleRemove(index)}
+              className="bg-red-300 hover:bg-red-400 absolute -top-0 -right-0 w-6 h-6 p-0 rounded-full"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          )}
         </div>
       ))}
     </div>

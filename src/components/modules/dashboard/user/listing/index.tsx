@@ -96,9 +96,7 @@ const UserListingManage = ({
             className="text-gray-600 hover:text-green-500 cursor-pointer"
             title="Edit"
             onClick={() =>
-              router.push(
-                `/user/shop/products/update-product/${row.original._id}`
-              )
+              router.push(`/user/listing/update-product/${row.original._id}`)
             }
           >
             <Edit className="w-5 h-5" />
