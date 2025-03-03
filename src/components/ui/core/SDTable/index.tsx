@@ -35,7 +35,7 @@ export function SDTable<TData, TValue>({
   return (
     <div className="rounded-md border">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-gray-200">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {

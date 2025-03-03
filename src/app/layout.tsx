@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.className} `} suppressHydrationWarning>
+      <body className={`${openSans.className}`} suppressHydrationWarning>
         <Providers>{children}</Providers>
         <Toaster richColors position="top-center" />
       </body>

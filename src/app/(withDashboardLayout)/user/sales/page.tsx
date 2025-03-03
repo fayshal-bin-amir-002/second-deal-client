@@ -1,7 +1,11 @@
-const UserSalesPage = () => {
+import UserSalesManage from "@/components/modules/dashboard/user/sales";
+import { getUserSalesHistory } from "@/services/transactions";
+
+const UserSalesPage = async () => {
+  const { data, meta } = await getUserSalesHistory();
   return (
     <div>
-      <p>UserSalesPage</p>
+      <UserSalesManage data={data} meta={meta} />
     </div>
   );
 };

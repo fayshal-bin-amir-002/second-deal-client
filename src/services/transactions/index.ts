@@ -1,14 +1,20 @@
 import { IErrorResponse } from "@/types";
 import { cookies } from "next/headers";
 
-export const getAllListingItems = async () => {
+export const getUserPurchasesHistory = async (page?: string) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings`, {
-      next: {
-        tags: ["Listing"],
-      },
-      cache: "force-cache",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/transactions/purchases?page=${page}`,
+      {
+        next: {
+          tags: ["Purchases"],
+        },
+        cache: "force-cache",
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+      }
+    );
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -16,13 +22,13 @@ export const getAllListingItems = async () => {
   }
 };
 
-export const getUserListingItems = async (page?: string) => {
+export const getUserSalesHistory = async (page?: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/listings/my-listing?page=${page}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/transactions/sales?page=${page}`,
       {
         next: {
-          tags: ["UserListings"],
+          tags: ["Purchases"],
         },
         cache: "force-cache",
         headers: {

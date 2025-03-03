@@ -101,7 +101,7 @@ const UserListingManage = ({
   return (
     <div>
       <SDTable columns={columns} data={items || []} />
-      <SDPagination totalPage={meta?.totalPage} />
+      {meta?.totalPage > 0 && <SDPagination totalPage={meta?.totalPage} />}
     </div>
   );
 };
