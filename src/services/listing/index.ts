@@ -94,3 +94,22 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
     throw new Error(error?.message);
   }
 };
+
+export const deleteUserProduct = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+      }
+    );
+    revalidateTag("UserListings SingleProduct Listing");
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};

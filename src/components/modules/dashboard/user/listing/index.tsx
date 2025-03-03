@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
-import { IListingItem, IMeta } from "@/types";
+import { IErrorResponse, IListingItem, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye, Plus, Trash } from "lucide-react";
 import Image from "next/image";
@@ -11,6 +11,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ViewListItemModal from "../modal/ViewListItemModal";
+import Swal from "sweetalert2";
+import { deleteUserProduct } from "@/services/listing";
 
 const UserListingManage = ({
   items,
@@ -20,14 +22,49 @@ const UserListingManage = ({
   meta: IMeta;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IListingItem | null>(null);
   const router = useRouter();
   const handleView = (data: IListingItem) => {
     setModalOpen(true);
     setSelectedItem(data);
   };
-  const handleDelete = (id: string) => {
-    console.log(id);
+  const handleDelete = async (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await deleteUserProduct(id);
+          if (res?.success) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: res?.message,
+            });
+          }
+        } catch (err) {
+          const error = err as IErrorResponse;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error?.message,
+          });
+        }
+      }
+    });
   };
 
   const columns: ColumnDef<IListingItem>[] = [
