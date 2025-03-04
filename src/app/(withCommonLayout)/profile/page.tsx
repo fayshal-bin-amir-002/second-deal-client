@@ -1,8 +1,11 @@
+import UserProfile from "@/components/modules/profile";
+import { myProfile } from "@/services/auth";
+
 const ProfilePage = async () => {
-  // const {data} = await
+  const { data } = await myProfile();
   return (
     <div>
-      <p>ProfilePage</p>
+      <UserProfile user={data} />
     </div>
   );
 };

@@ -9,10 +9,14 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { buyAProduct } from "@/services/transactions";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToWishlist } from "@/redux/features/wishlistSlice";
 
 const ProductDetials = ({ product }: { product: IListingItem }) => {
   const [mainImage, setMainImage] = useState(product?.images[0]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
@@ -119,7 +123,13 @@ const ProductDetials = ({ product }: { product: IListingItem }) => {
                   </Button>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      dispatch(addToWishlist(product));
+                      toast.success("Product added to wishlist.");
+                    }}
+                  >
                     Add to Wishlist <ShoppingBag />
                   </Button>
                   <Button

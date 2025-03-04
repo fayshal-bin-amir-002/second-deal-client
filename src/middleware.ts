@@ -3,7 +3,7 @@ import { getCurrentUser } from "./services/auth";
 
 const roleBasedPrivateRoutes = {
   user: [/^\/user(\/|$)/, /^\/profile/],
-  admin: [/^\/admin(\/|$)/],
+  admin: [/^\/admin(\/|$)/, /^\/profile/],
 };
 
 const authRoutes = ["/login", "/register"];

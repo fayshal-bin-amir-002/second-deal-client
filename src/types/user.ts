@@ -22,3 +22,10 @@ export interface IUserInfo {
   role: UserRole;
   isActive: boolean;
 }
+
+export interface IUpdateUser {
+  name: string;
+  email: string;
+  location: string;
+  phoneNumber: string;
+}

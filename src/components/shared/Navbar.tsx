@@ -20,11 +20,15 @@ import { logoutUser } from "@/services/auth";
 import NavBarSheet from "../modules/home/navbar/NavBarSheet";
 import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/routes/protectedRoutes";
+import { useAppSelector } from "@/redux/hooks";
+import { wishlistSelector } from "@/redux/features/wishlistSlice";
 
 const Navbar = () => {
   const { user, setIsLoading } = useUser();
   const pathname = usePathname();
   const router = useRouter();
+
+  const wishlist = useAppSelector(wishlistSelector);
 
   const handleLogout = async () => {
     await logoutUser();
@@ -63,13 +67,13 @@ const Navbar = () => {
                 <Button variant="outline">Sell My Product</Button>
               </Link>
             )}
-            <Link href="/wishlists" className=" font-medium relative">
+            <Link href="/" className=" font-medium relative">
               <MessageSquareText />
             </Link>
             <Link href="/wishlists" className="font-medium relative">
               <ShoppingBag />
               <span className="-top-2.5 -right-2.5 absolute text-orange-400">
-                1
+                {wishlist?.length || 0}
               </span>
             </Link>
             {user ? (
