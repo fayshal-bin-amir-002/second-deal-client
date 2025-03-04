@@ -62,7 +62,10 @@ const Navbar = () => {
 
           <div className="flex items-center gap-5 md:gap-8">
             {user && (
-              <Link href="/" className="hidden md:block">
+              <Link
+                href={`/user/my-listing/add-product`}
+                className="hidden md:block"
+              >
                 <Button>Sell My Product</Button>
               </Link>
             )}

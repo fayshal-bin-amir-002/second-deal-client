@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/auth";
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/user/],
-  admin: [/^\/admin/],
+  user: [/^\/user(\/|$)/],
+  admin: [/^\/admin(\/|$)/],
 };
 
 const authRoutes = ["/login", "/register"];
@@ -33,6 +33,7 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
+  return NextResponse.redirect(new URL("/", request.url));
 };
 
 export const config = {
@@ -40,8 +41,8 @@ export const config = {
     "/login",
     "/register",
     "/admin",
-    "/admin/:page",
+    "/admin/:path*",
     "/user",
-    "/user/:page",
+    "/user/:path*",
   ],
 };

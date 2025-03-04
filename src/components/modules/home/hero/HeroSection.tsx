@@ -6,6 +6,7 @@ import image1 from "../../../../assets/hero-image-1.jpg";
 import image2 from "../../../../assets/hero-image-2.jpg";
 import image3 from "../../../../assets/hero-image-3.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -28,9 +29,11 @@ const HeroSection = () => {
             </div>
             <div className="flex flex-row gap-4">
               <Button variant="outline">Explore All Products</Button>
-              <Button className="gap-2">
-                List My Product <MoveRight className="w-4 h-4" />
-              </Button>
+              <Link href="/user/my-listing/add-product">
+                <Button className="gap-2">
+                  List My Product <MoveRight className="w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 md:gap-8">
