@@ -1,7 +1,11 @@
-const TransactionManagementPage = () => {
+import TransactionsManagement from "@/components/modules/dashboard/admin/transactions";
+import { getAllTransactionsHistory } from "@/services/transactions";
+
+const TransactionManagementPage = async () => {
+  const { data, meta } = await getAllTransactionsHistory();
   return (
     <div>
-      <p>TransactionManagementPage</p>
+      <TransactionsManagement data={data} meta={meta} />
     </div>
   );
 };

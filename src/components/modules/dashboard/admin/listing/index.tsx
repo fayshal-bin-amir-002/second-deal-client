@@ -5,16 +5,15 @@ import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
 import { IErrorResponse, IListingItem, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Eye, Plus, Trash } from "lucide-react";
+import { Eye, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import ViewListItemModal from "../modal/ViewListItemModal";
 import Swal from "sweetalert2";
 import { deleteUserProduct } from "@/services/listing";
+import ViewListItem from "../modal/ViewListItem";
 
-const UserListingManage = ({
+const ListingManagement = ({
   items,
   meta,
 }: {
@@ -23,7 +22,6 @@ const UserListingManage = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IListingItem | null>(null);
-  const router = useRouter();
   const handleView = (data: IListingItem) => {
     setModalOpen(true);
     setSelectedItem(data);
@@ -109,7 +107,7 @@ const UserListingManage = ({
         <span
           className={`${
             row.original.status === "Available" && "text-orange-400"
-          } ${row.original.status === "Sold" && "text-green-400"}`}
+          } ${row.original.status === "Sold" && "text-green-500"}`}
         >
           {row.original.status}
         </span>
@@ -136,16 +134,6 @@ const UserListingManage = ({
           </button>
 
           <button
-            className="text-gray-600 hover:text-green-500 cursor-pointer"
-            title="Edit"
-            onClick={() =>
-              router.push(`/user/listing/update-product/${row.original._id}`)
-            }
-          >
-            <Edit className="w-5 h-5" />
-          </button>
-
-          <button
             className="text-gray-600 hover:text-red-500 cursor-pointer"
             title="Delete"
             onClick={() => handleDelete(row.original._id)}
@@ -158,17 +146,10 @@ const UserListingManage = ({
   ];
   return (
     <div>
-      <div className="text-right pb-4">
-        <Link href="/user/listing/add-product">
-          <Button variant="outline">
-            Add My Product <Plus />
-          </Button>
-        </Link>
-      </div>
       <SDTable columns={columns} data={items || []} />
       {meta?.totalPage > 0 && <SDPagination totalPage={meta?.totalPage} />}
       {modalOpen && (
-        <ViewListItemModal
+        <ViewListItem
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           data={selectedItem as IListingItem}
@@ -178,4 +159,4 @@ const UserListingManage = ({
   );
 };
 
-export default UserListingManage;
+export default ListingManagement;

@@ -69,3 +69,24 @@ export const updateTransactionStatus = async (
     throw new Error(error?.message);
   }
 };
+
+export const getAllTransactionsHistory = async (page?: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/transactions?page=${page}`,
+      {
+        next: {
+          tags: ["Transactions"],
+        },
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+        cache: "force-cache",
+      }
+    );
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};
