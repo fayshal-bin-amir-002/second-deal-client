@@ -77,7 +77,7 @@ const Navbar = () => {
             </Link>
             <Link href="/wishlists" className="font-medium relative">
               <ShoppingBag />
-              <span className="-top-2 -right-2 absolute text-orange-400">
+              <span className="-top-2.5 -right-2.5 absolute text-orange-400">
                 1
               </span>
             </Link>

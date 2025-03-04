@@ -90,3 +90,24 @@ export const getAllTransactionsHistory = async (page?: string) => {
     throw new Error(error?.message);
   }
 };
+
+export const buyAProduct = async (data: { itemId: string }) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/transactions`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    revalidateTag("Purchases UserListings");
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};
