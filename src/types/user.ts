@@ -1,4 +1,4 @@
-import { Locations } from "@/components/modules/auth/register/registerValidation";
+import { Locations } from "@/constants/locations";
 
 export interface IUser {
   userId: string;

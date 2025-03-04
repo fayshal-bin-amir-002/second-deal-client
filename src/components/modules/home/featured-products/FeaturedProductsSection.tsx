@@ -3,7 +3,7 @@ import SectionContainer from "@/components/shared/SectionContainer";
 import SectionTitle from "@/components/shared/SectionTitle";
 import { getAllAvailableListingItems } from "@/services/listing";
 import { IListingItem } from "@/types";
-import ProductCard from "../../product/proudct-card/ProductCard";
+import ProductCard from "../../product/product-card/ProductCard";
 
 const FeaturedProductsSection = async () => {
   const { data } = await getAllAvailableListingItems();

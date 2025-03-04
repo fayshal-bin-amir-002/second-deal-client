@@ -5,9 +5,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const AllCategory = ({ categories }: { categories: ICategory[] }) => {
-  const filteredCategories = categories.filter(
-    (category) => category.name !== "Others"
-  );
+  const filteredCategories = categories
+    .slice(0, 6)
+    ?.filter((category) => category.name !== "Others");
 
   const othersCategory = categories.find(
     (category) => category.name === "Others"

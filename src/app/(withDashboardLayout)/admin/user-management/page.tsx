@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import UserManagement from "@/components/modules/dashboard/admin/user";
 import { getAllUsers } from "@/services/user";
 

@@ -1,13 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import SDPagination from "@/components/ui/core/SDPagination";
 import { SDTable } from "@/components/ui/core/SDTable";
 import { IErrorResponse, IListingItem, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, Plus, Trash } from "lucide-react";
+import { Eye, Trash } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { deleteUserProduct } from "@/services/listing";

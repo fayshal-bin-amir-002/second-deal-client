@@ -1,16 +1,5 @@
 import { z } from "zod";
 
-export enum Locations {
-  DHAKA = "Dhaka",
-  CHITTAGONG = "Chittagong",
-  RAJSHAHI = "Rajshahi",
-  KHULNA = "Khulna",
-  BARISAL = "Barisal",
-  SYLHET = "Sylhet",
-  RANGPUR = "Rangpur",
-  MYMENSINGH = "Mymensingh",
-}
-
 export const registerFormSchema = z.object({
   name: z.string({ required_error: "Name is required" }).trim(),
   email: z

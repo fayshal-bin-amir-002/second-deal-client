@@ -81,7 +81,6 @@ export const getAllTransactionsHistory = async (page?: string) => {
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
-        cache: "force-cache",
       }
     );
     return await res.json();

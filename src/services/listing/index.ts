@@ -19,15 +19,29 @@ export const getAllListingItems = async () => {
   }
 };
 
-export const getAllAvailableListingItems = async () => {
+export const getAllAvailableListingItems = async (query?: {
+  [key: string]: string | string[] | undefined;
+}) => {
+  const params = new URLSearchParams();
+  if (query?.page) {
+    params.append("page", query?.page?.toString());
+  }
+  if (query?.category) {
+    params.append("category", query?.category?.toString());
+  }
+  if (query?.location) {
+    params.append("location", query?.location?.toString());
+  }
+  if (query?.condition) {
+    params.append("condition", query?.condition?.toString());
+  }
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/listings/available-items`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/available-items?${params}`,
       {
         next: {
           tags: ["AvailableListing"],
         },
-        cache: "force-cache",
       }
     );
     return await res.json();

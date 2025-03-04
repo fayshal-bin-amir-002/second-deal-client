@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../../button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -7,6 +7,17 @@ const SDPagination = ({ totalPage }: { totalPage: number }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handlePagginationQuery = (value: string | number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", value.toString());
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
   return (
     <div className="flex items-center gap-3 my-6 justify-end">
       <Button
@@ -16,7 +27,7 @@ const SDPagination = ({ totalPage }: { totalPage: number }) => {
         onClick={() => {
           if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
-            router.push(`${pathname}?page=${currentPage - 1}`);
+            handlePagginationQuery(currentPage - 1);
           }
         }}
       >
@@ -28,7 +39,7 @@ const SDPagination = ({ totalPage }: { totalPage: number }) => {
           key={i}
           onClick={() => {
             setCurrentPage(i + 1);
-            router.push(`${pathname}?page=${i + 1}`);
+            handlePagginationQuery(i + 1);
           }}
         >
           {i + 1}
@@ -41,7 +52,7 @@ const SDPagination = ({ totalPage }: { totalPage: number }) => {
         onClick={() => {
           if (currentPage < totalPage) {
             setCurrentPage(currentPage + 1);
-            router.push(`${pathname}?page=${currentPage + 1}`);
+            handlePagginationQuery(currentPage + 1);
           }
         }}
       >

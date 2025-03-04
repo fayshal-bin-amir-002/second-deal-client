@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import TransactionsManagement from "@/components/modules/dashboard/admin/transactions";
 import { getAllTransactionsHistory } from "@/services/transactions";
 

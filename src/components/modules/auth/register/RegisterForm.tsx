@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Locations, registerFormSchema } from "./registerValidation";
+import { registerFormSchema } from "./registerValidation";
 import {
   Form,
   FormControl,
@@ -31,6 +31,7 @@ import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IErrorResponse } from "@/types";
 import { useUser } from "@/context/UserContext";
+import { Locations } from "@/constants/locations";
 
 export function RegisterForm({
   className,
