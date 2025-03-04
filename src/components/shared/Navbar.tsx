@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav
       className={` sticky top-0 w-full z-50 transition-all duration-100 py-3 ${
-        isScrolled ? "bg-white shadow" : "bg-transparent"
+        isScrolled ? "bg-white shadow" : "bg-orange-50/50"
       }`}
     >
       <Container>

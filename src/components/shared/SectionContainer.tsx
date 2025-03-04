@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 const SectionContainer = ({ children }: { children: ReactNode }) => {
-  return <div className="py-12 md:py-16 lg:py-20">{children}</div>;
+  return <div className="pb-12 md:pb-16 lg:pb-20">{children}</div>;
 };
 
 export default SectionContainer;

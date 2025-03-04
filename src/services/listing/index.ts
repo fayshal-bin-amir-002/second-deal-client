@@ -19,6 +19,24 @@ export const getAllListingItems = async () => {
   }
 };
 
+export const getAllAvailableListingItems = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/available-items`,
+      {
+        next: {
+          tags: ["AvailableListing"],
+        },
+        cache: "force-cache",
+      }
+    );
+    return await res.json();
+  } catch (err) {
+    const error = err as IErrorResponse;
+    throw new Error(error?.message);
+  }
+};
+
 export const getUserListingItems = async (page?: string) => {
   try {
     const res = await fetch(
@@ -49,7 +67,7 @@ export const addProductToList = async (data: IProduct) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("UserListings Listing");
+    revalidateTag("UserListings Listing AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -87,7 +105,7 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("UserListings SingleProduct Listing");
+    revalidateTag("UserListings SingleProduct Listing AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -106,7 +124,7 @@ export const deleteUserProduct = async (id: string) => {
         },
       }
     );
-    revalidateTag("UserListings SingleProduct Listing");
+    revalidateTag("UserListings SingleProduct Listing AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
