@@ -21,9 +21,9 @@ export default function StoreProvider({
 
   return (
     <Provider store={storeRef.current}>
-      {/* <PersistGate loading={<LoadingSpinner />} persistor={persistedStore}> */}
-      {children}
-      {/* </PersistGate> */}
+      <PersistGate loading={<LoadingSpinner />} persistor={persistedStore}>
+        {children}
+      </PersistGate>
     </Provider>
   );
 }
