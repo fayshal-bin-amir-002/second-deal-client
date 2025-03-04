@@ -6,7 +6,6 @@ import logo from "@/assets/logo.png";
 import Image from "next/image";
 import { MessageSquareText, ShoppingBag, User } from "lucide-react";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
@@ -19,34 +18,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logoutUser } from "@/services/auth";
 import NavBarSheet from "../modules/home/navbar/NavBarSheet";
+import { usePathname, useRouter } from "next/navigation";
+import { protectedRoutes } from "@/routes/protectedRoutes";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const { user, setIsLoading } = useUser();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 15) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await logoutUser();
     setIsLoading(true);
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
   };
 
   return (
     <nav
-      className={` sticky top-0 w-full z-50 transition-all duration-100 py-3 ${
-        isScrolled ? "bg-white shadow" : "bg-orange-50/50"
-      }`}
+      className={` sticky top-0 w-full z-50 transition-all duration-100 py-3 bg-white shadow
+      `}
     >
       <Container>
         <div className="flex justify-between items-center">
@@ -96,7 +87,7 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
                   <DropdownMenuGroup>
-                    <Link href="/">
+                    <Link href="/profile">
                       <DropdownMenuItem>Profile</DropdownMenuItem>
                     </Link>
                     <Link href={`/${user?.role}/dashboard`}>

@@ -19,6 +19,7 @@ export interface IListingItem {
     image: string;
     __v: number;
   };
+  location: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/auth";
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/user(\/|$)/],
+  user: [/^\/user(\/|$)/, /^\/profile/],
   admin: [/^\/admin(\/|$)/],
 };
 
@@ -40,6 +40,7 @@ export const config = {
   matcher: [
     "/login",
     "/register",
+    "/profile",
     "/admin",
     "/admin/:path*",
     "/user",

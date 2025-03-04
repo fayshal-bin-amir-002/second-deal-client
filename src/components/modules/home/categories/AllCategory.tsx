@@ -21,7 +21,7 @@ const AllCategory = ({ categories }: { categories: ICategory[] }) => {
         <CategoryCard key={othersCategory?._id} category={othersCategory} />
       )}
       <div className="hover:-translate-y-2 duration-300 h-[146px]">
-        <Link href="/">
+        <Link href="/categories">
           <Card className="bg-orange-100 flex items-center flex-col h-full justify-center">
             <CardContent>
               <h3 className="text-xl font-semibold text-center flex items-center gap-1">

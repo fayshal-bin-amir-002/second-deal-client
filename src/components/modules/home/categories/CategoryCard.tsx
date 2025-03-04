@@ -6,7 +6,7 @@ import Link from "next/link";
 const CategoryCard = ({ category }: { category: ICategory }) => {
   return (
     <div className="hover:-translate-y-2 duration-300">
-      <Link href="/">
+      <Link href={`/products?category=${category?._id}`}>
         <Card>
           <CardContent className="flex flex-col items-center justify-center">
             <div>

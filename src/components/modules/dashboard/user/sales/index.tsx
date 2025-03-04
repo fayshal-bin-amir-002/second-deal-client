@@ -56,8 +56,8 @@ const UserSalesManage = ({
       cell: ({ row }) => <span>{row.original.buyerId.phoneNumber}</span>,
     },
     {
-      accessorKey: "buyerLocation",
-      header: "Buyer Location",
+      accessorKey: "location",
+      header: "Location",
       cell: ({ row }) => <span>{row.original.buyerId.location}</span>,
     },
     {

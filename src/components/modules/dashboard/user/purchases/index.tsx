@@ -51,8 +51,8 @@ const UserPurchasesManage = ({
       cell: ({ row }) => <span>{row.original.sellerId.phoneNumber}</span>,
     },
     {
-      accessorKey: "sellerLocation",
-      header: "Seller Location",
+      accessorKey: "location",
+      header: "Location",
       cell: ({ row }) => <span>{row.original.sellerId.location}</span>,
     },
     {
