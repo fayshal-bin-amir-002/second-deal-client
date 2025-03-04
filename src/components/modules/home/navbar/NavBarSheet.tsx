@@ -23,9 +23,12 @@ const NavBarSheet = ({ user }: { user: IUser | null }) => {
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <div className="flex flex-col items-end gap-4">
+          <Link href={`/products`}>
+            <Button>All Products</Button>
+          </Link>
           <div className="flex justify-between items-center gap-4">
-            <Link href="/">
-              <Button>Sell My Product</Button>
+            <Link href="/user/my-listing/add-product">
+              <Button variant="outline">Sell My Product</Button>
             </Link>
             {!user && (
               <Link

@@ -28,7 +28,9 @@ const HeroSection = () => {
               </p>
             </div>
             <div className="flex flex-row gap-4">
-              <Button variant="outline">Explore All Products</Button>
+              <Link href="/products">
+                <Button variant="outline">Explore All Products</Button>
+              </Link>
               <Link href="/user/my-listing/add-product">
                 <Button className="gap-2">
                   List My Product <MoveRight className="w-4 h-4" />

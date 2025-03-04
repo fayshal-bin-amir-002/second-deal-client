@@ -60,21 +60,24 @@ const Navbar = () => {
             />
           </Link>
 
-          <div className="flex items-center gap-5 md:gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
+            <Link href={`/products`} className="hidden md:block">
+              <Button>All Products</Button>
+            </Link>
             {user && (
               <Link
                 href={`/user/my-listing/add-product`}
                 className="hidden md:block"
               >
-                <Button>Sell My Product</Button>
+                <Button variant="outline">Sell My Product</Button>
               </Link>
             )}
-            <Link href="/wishlists" className="text-lg font-medium relative">
+            <Link href="/wishlists" className=" font-medium relative">
               <MessageSquareText />
             </Link>
-            <Link href="/wishlists" className="text-lg font-medium relative">
+            <Link href="/wishlists" className="font-medium relative">
               <ShoppingBag />
-              <span className="-top-3 -right-3 absolute text-orange-400">
+              <span className="-top-2 -right-2 absolute text-orange-400">
                 1
               </span>
             </Link>

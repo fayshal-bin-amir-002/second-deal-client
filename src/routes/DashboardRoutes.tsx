@@ -4,6 +4,7 @@ import { useUser } from "@/context/UserContext";
 import {
   ArrowRightLeft,
   BadgeDollarSign,
+  ChartBarStacked,
   CreditCard,
   Home,
   LayoutDashboard,
@@ -59,6 +60,12 @@ const DashboardRoutes = () => {
         title: "Dashboard",
         url: `/${user?.role}/dashboard`,
         icon: LayoutDashboard,
+        isNotCollapsible: true,
+      },
+      {
+        title: "Category",
+        url: `/${user?.role}/category`,
+        icon: ChartBarStacked,
         isNotCollapsible: true,
       },
       {
