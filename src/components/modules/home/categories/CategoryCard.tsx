@@ -13,7 +13,7 @@ const CategoryCard = ({ category }: { category: ICategory }) => {
               <Image
                 src={category?.image}
                 alt={category?.name}
-                width={80}
+                width={60}
                 height={200}
                 className="mx-auto mb-2"
               />

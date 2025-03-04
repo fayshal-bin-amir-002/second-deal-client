@@ -10,7 +10,7 @@ const AllCategory = ({ categories }: { categories: ICategory[] }) => {
       {categories?.slice(0, 7)?.map((category) => (
         <CategoryCard key={category?._id} category={category} />
       ))}
-      <div className="h-[170px] hover:-translate-y-2 duration-300">
+      <div className="hover:-translate-y-2 duration-300 h-[146px]">
         <Link href="/">
           <Card className="bg-orange-100 flex items-center flex-col h-full justify-center">
             <CardContent>
