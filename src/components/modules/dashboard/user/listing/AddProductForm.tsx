@@ -84,7 +84,7 @@ const AddProductForm = () => {
       if (res?.success) {
         toast.success(res?.message);
 
-        router.push("/user/listing");
+        router.push("/user/my-listing");
       } else {
         toast.error(res?.message);
       }

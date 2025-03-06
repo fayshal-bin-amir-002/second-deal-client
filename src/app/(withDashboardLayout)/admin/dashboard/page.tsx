@@ -4,7 +4,7 @@ import AdminDashboardManagement from "@/components/modules/dashboard/admin/dashb
 import { getMetaData } from "@/services/meta";
 
 const AdminDashboardPage = async () => {
-  const data = await getMetaData();
+  const { data } = await getMetaData();
   return (
     <div>
       <AdminDashboardManagement data={data} />

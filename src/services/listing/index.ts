@@ -80,7 +80,7 @@ export const addProductToList = async (data: IProduct) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("UserListings");
+    revalidateTag("UserListings AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

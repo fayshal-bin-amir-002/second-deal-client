@@ -9,6 +9,7 @@ export const getMetaData = async () => {
       headers: {
         Authorization: (await cookies()).get("accessToken")!.value,
       },
+      cache: "force-cache",
     });
     return await res.json();
   } catch (err) {

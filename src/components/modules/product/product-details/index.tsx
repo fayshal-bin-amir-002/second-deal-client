@@ -3,7 +3,7 @@
 import { IErrorResponse, IListingItem } from "@/types";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Loader2, MessageSquare, ShoppingBag } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -11,16 +11,23 @@ import { toast } from "sonner";
 import { buyAProduct } from "@/services/transactions";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToWishlist } from "@/redux/features/wishlistSlice";
+import { useUser } from "@/context/UserContext";
 
 const ProductDetials = ({ product }: { product: IListingItem }) => {
+  const { user } = useUser();
   const [mainImage, setMainImage] = useState(product?.images[0]);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleOrder = async (id: string) => {
+    if (!user) {
+      router.push(`/login?redirectPath=${pathname}`);
+      return;
+    }
     setIsLoading(true);
     const data = {
       itemId: id,
@@ -42,7 +49,7 @@ const ProductDetials = ({ product }: { product: IListingItem }) => {
   };
 
   return (
-    <div className="py-6">
+    <div className="py-6 md:py-10 lg:py-16">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-2xl md:text-4xl font-semibold">Product Details</h3>
         <Button variant="outline" onClick={() => router.back()}>
