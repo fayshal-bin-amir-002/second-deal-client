@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import CategoryManagement from "@/components/modules/dashboard/admin/category";
 import { getAllCategory } from "@/services/category";
 

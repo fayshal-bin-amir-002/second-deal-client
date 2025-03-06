@@ -1,5 +1,7 @@
 import Container from "@/components/shared/Container";
 import SectionContainer from "@/components/shared/SectionContainer";
+export const dynamic = "force-dynamic";
+
 import SectionTitle from "@/components/shared/SectionTitle";
 import { getAllAvailableListingItems } from "@/services/listing";
 import { IListingItem } from "@/types";

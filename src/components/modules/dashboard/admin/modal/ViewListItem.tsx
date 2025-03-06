@@ -85,7 +85,7 @@ const ViewListItem = ({ modalOpen, setModalOpen, data }: IViewListItem) => {
           </div>
           <div>
             <h4 className="font-semibold">Phone Number</h4>
-            <p className="text-gray-600 text-sm">{data?.userId?.phone}</p>
+            <p className="text-gray-600 text-sm">{data?.userId?.phoneNumber}</p>
           </div>
           <div>
             <h4 className="font-semibold">Location</h4>

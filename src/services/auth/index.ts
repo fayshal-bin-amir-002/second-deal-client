@@ -78,7 +78,6 @@ export const myProfile = async () => {
       next: {
         tags: ["Profile"],
       },
-      cache: "no-store",
       method: "GET",
       headers: {
         Authorization: (await cookies()).get("accessToken")!.value,

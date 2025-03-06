@@ -159,7 +159,7 @@ const UserListingManage = ({
   return (
     <div>
       <div className="text-right pb-4">
-        <Link href="/user/listing/add-product">
+        <Link href="/user/my-listing/add-product">
           <Button variant="outline">
             Add My Product <Plus />
           </Button>

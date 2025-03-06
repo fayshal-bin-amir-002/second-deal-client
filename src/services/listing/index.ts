@@ -10,7 +10,6 @@ export const getAllListingItems = async () => {
       next: {
         tags: ["Listing"],
       },
-      cache: "force-cache",
     });
     return await res.json();
   } catch (err) {
@@ -81,7 +80,7 @@ export const addProductToList = async (data: IProduct) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("UserListings Listing AvailableListing");
+    revalidateTag("UserListings");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -119,7 +118,7 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("UserListings SingleProduct Listing AvailableListing");
+    revalidateTag("UserListings");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -138,7 +137,7 @@ export const deleteUserProduct = async (id: string) => {
         },
       }
     );
-    revalidateTag("UserListings SingleProduct Listing AvailableListing");
+    revalidateTag("UserListings Listing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

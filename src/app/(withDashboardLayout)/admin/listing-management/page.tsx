@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ListingManagement from "@/components/modules/dashboard/admin/listing";
 import { getAllListingItems } from "@/services/listing";
 

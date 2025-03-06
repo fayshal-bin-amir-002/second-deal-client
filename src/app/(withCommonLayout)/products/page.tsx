@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import AllProductsContainer from "@/components/modules/product/products-page";
 import Container from "@/components/shared/Container";
 import { getAllAvailableListingItems } from "@/services/listing";

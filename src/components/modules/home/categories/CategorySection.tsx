@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Container from "@/components/shared/Container";
 import SectionContainer from "@/components/shared/SectionContainer";
 import SectionTitle from "@/components/shared/SectionTitle";

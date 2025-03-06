@@ -15,7 +15,6 @@ export const getUserPurchasesHistory = async (page?: string) => {
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
-        cache: "no-store",
       }
     );
     return await res.json();
@@ -36,7 +35,6 @@ export const getUserSalesHistory = async (page?: string) => {
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
-        cache: "no-store",
       }
     );
     return await res.json();
@@ -62,7 +60,7 @@ export const updateTransactionStatus = async (
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("Sales UserListings");
+    revalidateTag("Sales");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -103,7 +101,7 @@ export const buyAProduct = async (data: { itemId: string }) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("Purchases UserListings");
+    revalidateTag("Purchases");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
