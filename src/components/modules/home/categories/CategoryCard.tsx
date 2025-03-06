@@ -7,18 +7,18 @@ const CategoryCard = ({ category }: { category: ICategory }) => {
   return (
     <div className="hover:-translate-y-2 duration-300">
       <Link href={`/products?category=${category?._id}`}>
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center">
-            <div>
+        <Card className="w-full h-full flex flex-col">
+          <CardContent className="flex flex-col items-center justify-between h-full">
+            <div className="flex-shrink-0 mb-2">
               <Image
                 src={category?.image}
                 alt={category?.name}
                 width={60}
-                height={200}
-                className="mx-auto mb-2"
+                height={100}
+                className="mx-auto"
               />
             </div>
-            <h3 className="text-xl md:text-2xl font-semibold text-center">
+            <h3 className="text-lg md:text-xl font-semibold text-center flex-grow flex items-end text-gray-600">
               {category?.name}
             </h3>
           </CardContent>

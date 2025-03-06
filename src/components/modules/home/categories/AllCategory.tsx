@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 const AllCategory = ({ categories }: { categories: ICategory[] }) => {
   const filteredCategories = categories
-    .slice(0, 6)
+    .slice(0, 5)
     ?.filter((category) => category.name !== "Others");
 
   const othersCategory = categories.find(
@@ -20,7 +20,7 @@ const AllCategory = ({ categories }: { categories: ICategory[] }) => {
       {othersCategory && (
         <CategoryCard key={othersCategory?._id} category={othersCategory} />
       )}
-      <div className="hover:-translate-y-2 duration-300 h-[146px]">
+      <div className="hover:-translate-y-2 duration-300">
         <Link href="/categories">
           <Card className="bg-orange-100 flex items-center flex-col h-full justify-center">
             <CardContent>
