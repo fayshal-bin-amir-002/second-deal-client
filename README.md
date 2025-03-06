@@ -2,7 +2,7 @@
 
 **SecondDeal** is a marketplace web application where users can buy and sell used items easily. The platform allows users to post listings, browse available products, and communicate securely with sellers. This project leverages the MERN stack (MongoDB, Express, React, Node.js) along with Next.js for server-side rendering (SSR) and static site generation (SSG).
 
-- Live Link [Next.js](https://second-deal-market.vercel.app)
+- Live Link [Second Deal](https://second-deal-market.vercel.app)
 
 ## Project Overview
 

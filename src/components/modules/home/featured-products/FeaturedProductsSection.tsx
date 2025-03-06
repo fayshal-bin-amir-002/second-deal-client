@@ -6,6 +6,8 @@ import SectionTitle from "@/components/shared/SectionTitle";
 import { getAllAvailableListingItems } from "@/services/listing";
 import { IListingItem } from "@/types";
 import ProductCard from "../../product/product-card/ProductCard";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const FeaturedProductsSection = async () => {
   const { data } = await getAllAvailableListingItems();
@@ -20,6 +22,11 @@ const FeaturedProductsSection = async () => {
               ?.map((product: IListingItem) => (
                 <ProductCard key={product?._id} product={product} />
               ))}
+        </div>
+        <div className="pt-8 md:pt-10 lg:pt-12 text-center">
+          <Link href="/products">
+            <Button>Explore All Products</Button>
+          </Link>
         </div>
       </Container>
     </SectionContainer>
