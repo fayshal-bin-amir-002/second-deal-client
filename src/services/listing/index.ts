@@ -10,6 +10,7 @@ export const getAllListingItems = async () => {
       next: {
         tags: ["Listing"],
       },
+      cache: "force-cache",
     });
     return await res.json();
   } catch (err) {
@@ -41,6 +42,7 @@ export const getAllAvailableListingItems = async (query?: {
         next: {
           tags: ["AvailableListing"],
         },
+        cache: "force-cache",
       }
     );
     return await res.json();
@@ -58,6 +60,7 @@ export const getUserListingItems = async (page?: string) => {
         next: {
           tags: ["UserListings"],
         },
+        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
@@ -96,6 +99,7 @@ export const getASingleProduct = async (id: string) => {
         next: {
           tags: ["SingleProduct"],
         },
+        cache: "force-cache",
       }
     );
     return await res.json();
@@ -118,7 +122,7 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("UserListings");
+    revalidateTag("UserListings AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -137,7 +141,7 @@ export const deleteUserProduct = async (id: string) => {
         },
       }
     );
-    revalidateTag("UserListings Listing");
+    revalidateTag("UserListings AvailableListing");
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

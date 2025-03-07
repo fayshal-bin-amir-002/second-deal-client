@@ -13,6 +13,7 @@ export const getAllUsers = async () => {
       next: {
         tags: ["Users"],
       },
+      cache: "force-cache",
     });
     return await res.json();
   } catch (err) {

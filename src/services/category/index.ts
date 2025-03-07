@@ -15,6 +15,7 @@ export const getAllCategory = async () => {
       next: {
         tags: ["Category"],
       },
+      cache: "force-cache",
     });
     return await res.json();
   } catch (err) {

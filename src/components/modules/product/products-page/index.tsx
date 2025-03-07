@@ -5,6 +5,8 @@ import ProductCard from "../product-card/ProductCard";
 import FilterProductSheet from "./FilterProductSheet";
 import SDPagination from "@/components/ui/core/SDPagination";
 import NoDataFound from "@/components/shared/NoDataFound";
+import { Suspense } from "react";
+import LoadingSpinner from "@/app/loading";
 
 const AllProductsContainer = ({
   data,
@@ -18,6 +20,7 @@ const AllProductsContainer = ({
       <div className="text-left mb-6">
         <FilterProductSheet />
       </div>
+      {/* <Suspense fallback={<LoadingSpinner />}> */}
       {data?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data &&
@@ -28,6 +31,7 @@ const AllProductsContainer = ({
       ) : (
         <NoDataFound name="Products" />
       )}
+      {/* </Suspense> */}
       {meta?.totalPage > 0 && (
         <div>
           <SDPagination totalPage={meta?.totalPage} />

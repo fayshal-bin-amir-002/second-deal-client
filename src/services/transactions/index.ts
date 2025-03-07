@@ -12,6 +12,7 @@ export const getUserPurchasesHistory = async (page?: string) => {
         next: {
           tags: ["Purchases"],
         },
+        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
@@ -32,6 +33,7 @@ export const getUserSalesHistory = async (page?: string) => {
         next: {
           tags: ["Sales"],
         },
+        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
@@ -76,6 +78,7 @@ export const getAllTransactionsHistory = async (page?: string) => {
         next: {
           tags: ["Transactions"],
         },
+        cache: "force-cache",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
