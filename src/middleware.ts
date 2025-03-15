@@ -18,7 +18,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `http://second-deal-market.vercel.app/login?redirectPath=${pathname}`,
+          `https://second-deal-market.vercel.app/login?redirectPath=${pathname}`,
           request.url
         )
       );

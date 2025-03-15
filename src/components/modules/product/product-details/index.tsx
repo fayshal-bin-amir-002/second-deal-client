@@ -94,13 +94,13 @@ const ProductDetials = ({ product }: { product: IListingItem }) => {
                     <Badge>{product?.category?.name}</Badge>
                   </span>
                 </h2>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600">
                   Seller - {product?.userId.name} |
                   <small>
                     {new Date(product?.createdAt).toLocaleDateString()}
                   </small>
                 </p>
-                <div className="mb-4">
+                <div className="my-4">
                   <span className="text-2xl font-bold mr-2">
                     ${product?.price}
                   </span>

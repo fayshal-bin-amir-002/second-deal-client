@@ -3,6 +3,7 @@
 import { IErrorResponse, IProduct } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { revalidateTags } from "../revalidate_tag";
 
 export const getAllListingItems = async () => {
   try {
@@ -83,7 +84,7 @@ export const addProductToList = async (data: IProduct) => {
       },
       body: JSON.stringify(data),
     });
-    revalidateTag("UserListings AvailableListing");
+    await revalidateTags(["UserListings", "AvailableListing"]);
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -122,7 +123,7 @@ export const updateListingProduct = async (id: string, data: IProduct) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("UserListings AvailableListing");
+    await revalidateTags(["UserListings", "AvailableListing"]);
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -141,7 +142,7 @@ export const deleteUserProduct = async (id: string) => {
         },
       }
     );
-    revalidateTag("UserListings AvailableListing");
+    await revalidateTags(["UserListings", "AvailableListing"]);
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;

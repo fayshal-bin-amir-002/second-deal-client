@@ -3,6 +3,7 @@
 import { IErrorResponse } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { revalidateTags } from "../revalidate_tag";
 
 export const getUserPurchasesHistory = async (page?: string) => {
   try {
@@ -62,7 +63,7 @@ export const updateTransactionStatus = async (
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("Sales");
+    await revalidateTags(["Sales", "AvailableListing"]);
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
@@ -104,7 +105,7 @@ export const buyAProduct = async (data: { itemId: string }) => {
         body: JSON.stringify(data),
       }
     );
-    revalidateTag("Purchases");
+    await revalidateTags(["Purchases", "AvailableListing"]);
     return await res.json();
   } catch (err) {
     const error = err as IErrorResponse;
