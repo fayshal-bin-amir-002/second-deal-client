@@ -33,10 +33,10 @@ import { z } from "zod";
 const UserProfile = ({ user }: { user: IUserInfo }) => {
   const form = useForm({
     defaultValues: {
-      name: user.name,
-      email: user.email,
-      location: user.location,
-      phoneNumber: user.phoneNumber,
+      name: user?.name,
+      email: user?.email,
+      location: user?.location,
+      phoneNumber: user?.phoneNumber,
     },
     resolver: zodResolver(
       z.object({

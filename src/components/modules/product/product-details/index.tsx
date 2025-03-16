@@ -142,7 +142,13 @@ const ProductDetials = ({ product }: { product: IListingItem }) => {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      toast.warning("This feature is not available right now.");
+                      if (user) {
+                        router.push(`/messages/${product?.userId?._id}`);
+                      } else {
+                        router.push(
+                          `/login?redirectPath=/messages/${product?.userId?._id}`
+                        );
+                      }
                     }}
                   >
                     Contact Seller <MessageSquare />

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/auth";
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/user(\/|$)/, /^\/profile/],
+  user: [/^\/user(\/|$)/, /^\/profile/, /^\/messages/],
   admin: [/^\/admin(\/|$)/, /^\/profile/],
 };
 
@@ -18,7 +18,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `https://second-deal-market.vercel.app/login?redirectPath=${pathname}`,
+          `http://localhost:3000/login?redirectPath=${pathname}`,
           request.url
         )
       );
@@ -41,6 +41,8 @@ export const config = {
     "/login",
     "/register",
     "/profile",
+    "/messages",
+    "/messages/:path*",
     "/admin",
     "/admin/:path*",
     "/user",

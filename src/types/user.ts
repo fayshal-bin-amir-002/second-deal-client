@@ -23,6 +23,14 @@ export interface IUserInfo {
   isActive: boolean;
 }
 
+export interface IMessageUser {
+  _id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  isOnline: boolean;
+}
+
 export interface IUpdateUser {
   name: string;
   email: string;

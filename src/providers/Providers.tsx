@@ -3,11 +3,14 @@
 import UserProvider from "@/context/UserContext";
 import { ReactNode } from "react";
 import StoreProvider from "./StoreProvider";
+import { SocketProvider } from "@/context/SocketContext";
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <UserProvider>
-      <StoreProvider>{children}</StoreProvider>
+      <StoreProvider>
+        <SocketProvider>{children}</SocketProvider>
+      </StoreProvider>
     </UserProvider>
   );
 };

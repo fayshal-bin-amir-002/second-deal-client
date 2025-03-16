@@ -5,3 +5,4 @@ export * from "./listingItem";
 export * from "./meta";
 export * from "./transaction";
 export * from "./adminDashboardStatus";
+export * from "./message";

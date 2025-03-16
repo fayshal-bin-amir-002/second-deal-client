@@ -22,13 +22,38 @@ import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/routes/protectedRoutes";
 import { useAppSelector } from "@/redux/hooks";
 import { wishlistSelector } from "@/redux/features/wishlistSlice";
+import { useSocket } from "@/context/SocketContext";
+import { useEffect, useState } from "react";
+import { IConversation } from "@/types";
 
 const Navbar = () => {
+  const [conversations, setConversations] = useState<IConversation[]>([]);
   const { user, setIsLoading } = useUser();
+  const { socket } = useSocket();
   const pathname = usePathname();
   const router = useRouter();
 
+  const myId = user?.userId;
+
   const wishlist = useAppSelector(wishlistSelector);
+
+  useEffect(() => {
+    if (socket && myId) {
+      socket.emit("sidebar", myId);
+      socket.on("sidebar-conversation", (data) => {
+        setConversations(data);
+      });
+
+      return () => {
+        socket.off("conversation");
+      };
+    }
+  }, [socket, myId]);
+
+  const totalUnseenCount = conversations?.reduce(
+    (acc, conversation) => acc + (conversation?.unseenCount > 0 ? 1 : 0),
+    0
+  );
 
   const handleLogout = async () => {
     await logoutUser();
@@ -67,8 +92,13 @@ const Navbar = () => {
                 <Button variant="outline">Sell My Product</Button>
               </Link>
             )}
-            <Link href="/" className=" font-medium relative">
+            <Link href="/messages" className=" font-medium relative">
               <MessageSquareText />
+              {totalUnseenCount > 0 && (
+                <span className="-top-2.5 -right-2.5 absolute text-orange-400">
+                  {totalUnseenCount}
+                </span>
+              )}
             </Link>
             <Link href="/wishlists" className="font-medium relative">
               <ShoppingBag />
