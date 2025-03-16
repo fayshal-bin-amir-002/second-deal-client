@@ -26,9 +26,9 @@ const AllMessageManagement = () => {
   }, [socket, myId]);
 
   return (
-    <div className="py-6">
+    <div className="py-6 md:py-8 lg:py-10">
       {conversations?.length > 0 ? (
-        <div>
+        <div className="flex flex-col gap-4">
           {conversations?.map((conversation: IConversation) => (
             <ConversationCard
               key={conversation?._id}
