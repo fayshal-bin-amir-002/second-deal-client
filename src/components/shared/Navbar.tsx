@@ -80,7 +80,7 @@ const Navbar = () => {
             />
           </Link>
 
-          <div className="flex items-center gap-4 md:gap-8">
+          <div className="flex items-center gap-6 md:gap-8">
             <Link href={`/products`} className="hidden md:block">
               <Button>All Products</Button>
             </Link>
