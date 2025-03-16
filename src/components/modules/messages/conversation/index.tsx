@@ -8,17 +8,25 @@ import { useSocket } from "@/context/SocketContext";
 import { useUser } from "@/context/UserContext";
 import { IMessage, IMessageUser } from "@/types";
 import { SendHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ConversationManagement = ({ id }: { id: string }) => {
   const [currentUser, setCurrentUser] = useState<IMessageUser | null>(null);
   const [messages, setMessages] = useState<IMessage[] | []>([]);
+  const router = useRouter();
   const { socket, onlineUsers } = useSocket();
   const { user } = useUser();
   const myId = user?.userId;
 
   useEffect(() => {
-    if (socket && id) {
+    if (id && myId && id === myId) {
+      router.push("/messages");
+    }
+  }, [id, myId]);
+
+  useEffect(() => {
+    if (socket && id && myId !== id) {
       socket.emit("message-page", id);
       socket.emit("seen-message", id);
       socket.on("message-user", (data) => {
@@ -39,7 +47,7 @@ const ConversationManagement = ({ id }: { id: string }) => {
         socket.off("message");
       };
     }
-  }, [socket, id]);
+  }, [socket, id, myId]);
 
   const isOnline = onlineUsers?.includes(id) && currentUser?.isOnline === true;
 

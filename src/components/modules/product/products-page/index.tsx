@@ -5,8 +5,10 @@ import ProductCard from "../product-card/ProductCard";
 import FilterProductSheet from "./FilterProductSheet";
 import SDPagination from "@/components/ui/core/SDPagination";
 import NoDataFound from "@/components/shared/NoDataFound";
-import { Suspense } from "react";
-import LoadingSpinner from "@/app/loading";
+import { Input } from "@/components/ui/input";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
+import debounce from "@/utils/debounce";
 
 const AllProductsContainer = ({
   data,
@@ -15,10 +17,34 @@ const AllProductsContainer = ({
   data: IListingItem[];
   meta: IMeta;
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleSearchQuery = (query: string, value: string | number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(query, value.toString());
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
+
+  const debouncedSearch = useCallback(debounce(handleSearchQuery, 500), []);
+
   return (
     <div>
-      <div className="text-left mb-6">
+      <div className="text-left mb-6 md:mb-8 flex items-center justify-between gap-3">
         <FilterProductSheet />
+        <Input
+          name="search"
+          type="search"
+          className="max-w-xs"
+          placeholder="Search product..."
+          defaultValue=""
+          onChange={(e) => debouncedSearch("searchTerm", e.target?.value)}
+        />
       </div>
       {/* <Suspense fallback={<LoadingSpinner />}> */}
       {data?.length > 0 ? (

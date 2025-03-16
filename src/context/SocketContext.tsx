@@ -22,9 +22,12 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (userId && !isLoading) {
-      const socketInstance = io("http://localhost:3500", {
-        auth: { userId },
-      });
+      const socketInstance = io(
+        "https://seconddeal-backend-production.up.railway.app",
+        {
+          auth: { userId },
+        }
+      );
 
       socketInstance.on("onlineUsers", (data) => {
         setOnlineUsers(data);

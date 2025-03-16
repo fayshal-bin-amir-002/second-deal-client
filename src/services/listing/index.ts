@@ -36,6 +36,9 @@ export const getAllAvailableListingItems = async (query?: {
   if (query?.condition) {
     params.append("condition", query?.condition?.toString());
   }
+  if (query?.searchTerm) {
+    params.append("searchTerm", query?.searchTerm?.toString());
+  }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/listings/available-items?${params}`,
